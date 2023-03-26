@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ReadXmlForRedirect": {
+      "commandName": "Project",
+      "commandLineArgs": "/h",
+      "workingDirectory": "."
+    }
+  }
+}

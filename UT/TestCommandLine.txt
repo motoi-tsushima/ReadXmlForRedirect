@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<parameters>
+<bb>.\UT\blog.xml /b:b > .\UT\blog.csv</bb>
+<bw>.\UT\WordPress.xml /b:w > .\UT\wordpress.csv</bw>
+<rcsv>.\UT\blog.csv .\UT\wordpress.csv /r:csv > .\UT\redirect.csv</rcsv>
+<rredirect>.\UT\blog.csv .\UT\wordpress.csv /r:redirect > .\UT\redirect.csv</rredirect>
+<rrewriterule>.\UT\blog.csv .\UT\wordpress.csv /r:rewriterule > .\UT\redirect.csv</rcrewriterule>
+<h>/h</h>
+</parameters>
