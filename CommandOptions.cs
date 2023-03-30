@@ -73,15 +73,9 @@ namespace ReadXmlForRedirect
         {
             if (this.mode == MODE_NON)
             {
-                //設定ファイルを読み込む
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-                var configuration = builder.Build();
-
-                this.message = configuration["Message"];
-                this.help = configuration["Help"];
+                //設定ファイルを読み込むのは止めた。固定値はクラスで持つ。設定値を読み込む。
+                this.message = ConstSettings.Message;
+                this.help = ConstSettings.Help;
 
                 //コマンド・オプションの確認と設定をする
                 if (base.IsOption("b"))
