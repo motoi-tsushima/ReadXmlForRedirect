@@ -17,6 +17,7 @@ namespace ReadXmlForRedirect
         public const int MODE_ERROR = -1;
         public const int MODE_READ_XML = 1;
         public const int MODE_READ_CSV = 2;
+        public const int MODE_SHOW_NON = 100;
         public const int MODE_SHOW_HELP = 101;
 
         public const string BLOG_STANDARD_BLOGGER = "blogger";
@@ -63,6 +64,11 @@ namespace ReadXmlForRedirect
 
         private string message = string.Empty;
 
+        public string Message
+        {
+            get => this.message;
+        }
+
         private string help = string.Empty;
         public string Help
         {
@@ -96,8 +102,6 @@ namespace ReadXmlForRedirect
 
                     //エクスポートXML読み込みモード
                     this.mode = MODE_READ_XML;
-
-                    Console.WriteLine(this.message);
                 }
                 else if (base.IsOption("r"))
                 {
@@ -135,22 +139,17 @@ namespace ReadXmlForRedirect
                         //CSV形式で出力(ありえないルート)
                         redirectFileMode = ReadXmlElements.RedirectFileMode.CSV;
                     }
-
-                    Console.WriteLine(this.message);
                 }
                 else if(base.IsOption("h") || base.IsOption("?")) {
 
                     this.mode = MODE_SHOW_HELP;
 
-                    Console.WriteLine(this.help);
+                    //Console.WriteLine(this.help);
                 }
                 else
                 {
-                    Console.WriteLine(this.message);
-
-                    //エラー
-                    Console.WriteLine("/b:ブログ規格名   を指定してください。 例として、 /b:blogger , /b:wordpress など。");
-                    return true;
+                    this.mode = MODE_SHOW_NON;
+                    return false;
                 }
             }
 

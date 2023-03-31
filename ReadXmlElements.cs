@@ -212,14 +212,53 @@ namespace ReadXmlForRedirect
             {
                 foreach (var resultRow in resultTable)
                 {
-                    Console.WriteLine("RewriteRule {0} {1} [R=301,L]", resultRow[0], resultRow[1]);
+                    string[] inputDomainWords = resultRow[0].Split('/');
+                    string inputLocal = string.Empty;
+                    for (int i = 0; i < inputDomainWords.Length; i++)
+                    {
+                        if (i < 3) continue;
+                        if(i == 3)
+                        {
+                            inputLocal += ("^" + inputDomainWords[i]);
+                        }
+                        else
+                        {
+                            inputLocal += ("/" + inputDomainWords[i]);
+                        }
+                    }
+                    inputLocal += "$";
+
+                    string[] outputDomainWords = resultRow[1].Split('/');
+                    string outputLocal = string.Empty;
+                    for (int i = 0; i < outputDomainWords.Length; i++)
+                    {
+                        if (i < 3) continue;
+                        if (i == 3)
+                        {
+                            outputLocal += ("^" + outputDomainWords[i]);
+                        }
+                        else
+                        {
+                            outputLocal += ("/" + outputDomainWords[i]);
+                        }
+                    }
+
+                    Console.WriteLine("RewriteRule {0} {1} [R=301,L]", inputLocal, outputLocal);
                 }
             }
             else if (redirectFileMode == RedirectFileMode.htaccess2)
             {
                 foreach (var resultRow in resultTable)
                 {
-                    Console.WriteLine("Redirect 301 {0} {1}", resultRow[0], resultRow[1]);
+                    string[] inputDomainWords = resultRow[0].Split('/');
+                    string inputLocal = string.Empty;
+                    for (int i = 0; i < inputDomainWords.Length; i++)
+                    {
+                        if (i < 3) continue;
+                        inputLocal += ("/" + inputDomainWords[i]);
+                    }
+
+                    Console.WriteLine("Redirect permanent {0} {1}", inputLocal, resultRow[1]);
                 }
             }
             else

@@ -14,7 +14,13 @@ namespace ReadXmlForRedirect
             CommandOptions command = new(args);
 
             //コマンドモード(/b)を選択する。
-            if(command.IsMode() == CommandOptions.MODE_READ_XML)
+            if(command.IsMode() == CommandOptions.MODE_SHOW_NON)
+            {
+                Console.WriteLine(command.Message);
+                //エラー
+                //Console.WriteLine("/b:ブログ規格名   を指定してください。 例として、 /b:blogger , /b:wordpress など。");
+            }
+            else if(command.IsMode() == CommandOptions.MODE_READ_XML)
             {
                 //エクスポートxmlファイルの読み込みモード。
                 string xmlFilePath = command.Parameters[0];
@@ -42,6 +48,7 @@ namespace ReadXmlForRedirect
             }
             else if(command.IsMode() == CommandOptions.MODE_SHOW_HELP)
             {
+                Console.WriteLine(command.Message);
                 Console.WriteLine(command.Help);
             }
         }
