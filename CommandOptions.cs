@@ -86,6 +86,15 @@ namespace ReadXmlForRedirect
                 //コマンド・オプションの確認と設定をする
                 if (base.IsOption("b"))
                 {
+                    //エクスポートXML読み込みモード
+                    this.mode = MODE_READ_XML;
+
+                    if (base.Parameters.Count < 1)
+                    {
+                        Console.WriteLine("読取りファイルを指定してください。");
+                        return true;
+                    }
+
                     //--- blog の XMLファイルを読み込み、タイトルとURLをCSV出力する -----
                     blogStandard = base.Options["b"].ToLower();
 
@@ -99,14 +108,17 @@ namespace ReadXmlForRedirect
                         //Wordpress エクスポートXML 読み込みモード
                         blogStandard = BLOG_STANDARD_WORDPRESS;
                     }
-
-                    //エクスポートXML読み込みモード
-                    this.mode = MODE_READ_XML;
                 }
                 else if (base.IsOption("r"))
                 {
                     //--- XMLから出力した2つのCSVを読み込み、Rerirect用のURLとURLのCSVを出力する -----
                     this.mode = MODE_READ_CSV;
+
+                    if (base.Parameters.Count < 2)
+                    {
+                        Console.WriteLine("ファイルを二つ指定してください。");
+                        return true;
+                    }
 
                     this.inputCSVFilePath = base.Parameters[0];
                     this.outputCSVFilePath = base.Parameters[1];

@@ -13,7 +13,11 @@ namespace ReadXmlForRedirect
             //コマンドラインのパラメータを設定する。
             CommandOptions command = new(args);
 
-            //コマンドモード(/b)を選択する。
+            if(command.IsMode() == CommandOptions.MODE_ERROR)
+            {
+                return;
+            }
+
             if(command.IsMode() == CommandOptions.MODE_SHOW_NON)
             {
                 Console.WriteLine(command.Message);
@@ -29,17 +33,40 @@ namespace ReadXmlForRedirect
 
                 if (command.BlogStandard == CommandOptions.BLOG_STANDARD_BLOGGER)
                 {
+                    if (System.IO.File.Exists(xmlFilePath) == false)
+                    {
+                        Console.WriteLine("{0} ファイルが見つかりません。", xmlFilePath);
+                        return;
+                    }
+
                     //Blogger のエクスポートファイルを読み込む。(結果はCSVで出力する)
                     readXmlElements.ReadBloggerXml(xmlFilePath);
                 }
                 else if (command.BlogStandard == CommandOptions.BLOG_STANDARD_WORDPRESS)
                 {
+                    if (System.IO.File.Exists(xmlFilePath) == false)
+                    {
+                        Console.WriteLine("{0} ファイルが見つかりません。", xmlFilePath);
+                        return;
+                    }
+
                     //Wordpress のエクスポートファイルを読み込む。(結果はCSVで出力する)
                     readXmlElements.ReadWordpressXml(xmlFilePath);
                 }
             }
             else if(command.IsMode() == CommandOptions.MODE_READ_CSV)
             {
+                if (System.IO.File.Exists(command.InputCSVFilePath) == false)
+                {
+                    Console.WriteLine("{0} ファイルが見つかりません。", command.InputCSVFilePath);
+                    return;
+                }
+                if (System.IO.File.Exists(command.OutputCSVFilePath) == false)
+                {
+                    Console.WriteLine("{0} ファイルが見つかりません。", command.OutputCSVFilePath);
+                    return;
+                }
+
                 //CSVファイルの読み込みモード。
                 ReadXmlElements readXmlElements = new ReadXmlElements();
 

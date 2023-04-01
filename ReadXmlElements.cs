@@ -65,8 +65,12 @@ namespace ReadXmlForRedirect
             {
                 if (vals.Count < 2) continue;
 
+                //出力用タイトルとURLを生成する。
+                string blogTitle = vals[1].Replace(",", "，"); //カンマは全角に変換する。
+                string blogUrl = vals[0];
+
                 //--- タイトル,URL の順に出力する -----
-                string output = vals[1] + "," + vals[0];
+                string output = blogTitle + "," + blogUrl;
                 Console.WriteLine(output);
             }
 
@@ -108,8 +112,12 @@ namespace ReadXmlForRedirect
             {
                 if (vals.Count < 2) continue;
 
+                //出力用タイトルとURLを生成する。
+                string blogTitle = vals[0].Replace(",", "，"); //カンマは全角に変換する。
+                string blogUrl = vals[1];
+
                 //--- タイトル,URL の順に出力する -----
-                string output = vals[0] + "," + vals[1];
+                string output = blogTitle + "," + blogUrl;
                 Console.WriteLine(output);
             }
 
