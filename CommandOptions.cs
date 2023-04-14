@@ -7,7 +7,6 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using static ReadXmlForRedirect.ReadXmlElements;
-using Microsoft.Extensions.Configuration;
 
 namespace ReadXmlForRedirect
 {
@@ -139,12 +138,12 @@ namespace ReadXmlForRedirect
                     else if (option == "rewriterule")
                     {
                         //.htaccess RewriteRule 形式で出力
-                        redirectFileMode = ReadXmlElements.RedirectFileMode.htaccess1;
+                        redirectFileMode = ReadXmlElements.RedirectFileMode.RewriteRule;
                     }
                     else if (option == "redirect")
                     {
                         //.htaccess Redirect 形式で出力
-                        redirectFileMode = ReadXmlElements.RedirectFileMode.htaccess2;
+                        redirectFileMode = ReadXmlElements.RedirectFileMode.Redirect;
                     }
                     else
                     {

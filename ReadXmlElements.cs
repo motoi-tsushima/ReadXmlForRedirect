@@ -127,13 +127,15 @@ namespace ReadXmlForRedirect
             return false;
         }
 
-
+        /// <summary>
+        /// リダイレクト設定の出力形式
+        /// </summary>
         public enum RedirectFileMode
         {
             non,
             CSV,
-            htaccess1,
-            htaccess2
+            RewriteRule,
+            Redirect
         }
 
         /// <summary>
@@ -239,43 +241,14 @@ namespace ReadXmlForRedirect
                 }
             }
             //**** htaccess RewriteRule設定 出力モード *********
-            else if (redirectFileMode == RedirectFileMode.htaccess1)
+            else if (redirectFileMode == RedirectFileMode.RewriteRule)
             {
                 foreach (var resultRow in resultTable)
                 {
                     //==== 取得URL0からRewriteRuleの第1パラメータ(元URL)を生成する ======
-                    //string[] inputDomainWords = resultRow[0].Split('/');
-                    //string inputLocal = string.Empty;
-                    //for (int i = 0; i < inputDomainWords.Length; i++)
-                    //{
-                    //    if (i < 3) continue;
-                    //    if(i == 3)
-                    //    {
-                    //        inputLocal += ("^" + inputDomainWords[i]);
-                    //    }
-                    //    else
-                    //    {
-                    //        inputLocal += ("/" + inputDomainWords[i]);
-                    //    }
-                    //}
-                    //inputLocal += "$";
                     string[] inputLocals = GetDomainFoldername(resultRow[0]);
 
                     //==== 取得URL1からRewriteRuleの第2パラメータ(置換後URL)を生成する ======
-                    //string[] outputDomainWords = resultRow[1].Split('/');
-                    //string outputLocal = string.Empty;
-                    //for (int i = 0; i < outputDomainWords.Length; i++)
-                    //{
-                    //    if (i < 3) continue;
-                    //    if (i == 3)
-                    //    {
-                    //        outputLocal += ("^" + outputDomainWords[i]);
-                    //    }
-                    //    else
-                    //    {
-                    //        outputLocal += ("/" + outputDomainWords[i]);
-                    //    }
-                    //}
                     string[] outputLocals = GetDomainFoldername(resultRow[1]);
 
                     //==== RewriteRuleの設定値を出力する ==========
@@ -283,18 +256,11 @@ namespace ReadXmlForRedirect
                 }
             }
             //**** htaccess Redirect設定 出力モード *********
-            else if (redirectFileMode == RedirectFileMode.htaccess2)
+            else if (redirectFileMode == RedirectFileMode.Redirect)
             {
                 foreach (var resultRow in resultTable)
                 {
                     //===== Redirect permanent の第1パラメータ(元URL)を生成する ========
-                    //string[] inputDomainWords = resultRow[0].Split('/');
-                    //string inputLocal = string.Empty;
-                    //for (int i = 0; i < inputDomainWords.Length; i++)
-                    //{
-                    //    if (i < 3) continue;
-                    //    inputLocal += ("/" + inputDomainWords[i]);
-                    //}
                     string[] inputDomainWords = GetDomainFoldername(resultRow[0]);
 
                     //==== Redirect permanent の設定値を出力する ==========
