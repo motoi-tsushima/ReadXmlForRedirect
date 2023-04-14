@@ -2,7 +2,7 @@
   "profiles": {
     "ReadXmlForRedirect": {
       "commandName": "Project",
-      "commandLineArgs": "/r:redirect  ",
+      "commandLineArgs": "/h",
       "workingDirectory": "."
     }
   }
